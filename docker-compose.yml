@@ -25,7 +25,7 @@ services:
                 image: parity/polkadot
                 labels:
                         - traefik.enable=true
-                        - traefik.http.routers.polkadot.rule=Host(`polkadot-node.polkaview.network`)
+                        - traefik.http.routers.polkadot.rule=Host(`kusama-node.polkaview.network`)
                         - traefik.http.routers.polkadot.tls=true
                         - traefik.http.routers.polkadot.tls.certresolver=lets-encrypt
                         - traefik.http.services.polkadot.loadbalancer.server.port=9944
@@ -36,6 +36,8 @@ services:
                         "--ws-external",
                         "--rpc-cors=all",
                         "--pruning", "archive",
+                        "--wasm-execution", "Compiled",
+                        "--chain", "kusama",
                 ]
                 networks:
                         - web
