@@ -17,7 +17,7 @@ services:
                         - /var/run/docker.sock:/var/run/docker.sock
                         - ./traefik/traefik.toml:/traefik.toml
                         - ./traefik/traefik_dynamic.toml:/traefik_dynamic.toml
-                        - ./traefik/acme.json:/acme.json
+                        - ./traefik/acme.json:/acme.json # be sure to chmod 600 acme.json 
                 networks:
                         - web
         polkadot:
