@@ -1,0 +1,43 @@
+version: '3'
+
+networks:
+        web:
+                external: false
+
+services:
+        traefik:
+                container_name: traefik
+                image: traefik:v2.2
+                labels:
+                        - traefik.enable=true
+                ports:
+                        - 80:80
+                        - 443:443
+                volumes:
+                        - /var/run/docker.sock:/var/run/docker.sock
+                        - ./traefik/traefik.toml:/traefik.toml
+                        - ./traefik/traefik_dynamic.toml:/traefik_dynamic.toml
+                        - ./traefik/acme.json:/acme.json
+                networks:
+                        - web
+        polkadot:
+                container_name: polkadot
+                image: parity/polkadot
+                labels:
+                        - traefik.enable=true
+                        - traefik.http.routers.polkadot.rule=Host(`polkadot-node.polkaview.network`)
+                        - traefik.http.routers.polkadot.tls=true
+                        - traefik.http.routers.polkadot.tls.certresolver=lets-encrypt
+                        - traefik.http.services.polkadot.loadbalancer.server.port=9944
+                        - traefik.http.routers.polkadot.middlewares=node-whitelist@file
+                volumes:
+                        - /home/ubuntu/polkavolume:/polkadot
+                command: [
+                        "--ws-external",
+                        "--rpc-cors=all",
+                        "--pruning", "archive",
+                ]
+                networks:
+                        - web
+
+
