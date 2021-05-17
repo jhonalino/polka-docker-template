@@ -2,7 +2,7 @@
 	[http.middlewares.node-whitelist.ipWhiteList]
 		#only allow my local pc and polkaview frontend to connect
 		#blacklist everything else
-		sourceRange = ["75.82.190.61"] 
+		sourceRange = ["75.82.190.61", "67.205.143.91"] 
 
 [http.middlewares.simpleAuth.basicAuth]
 	users = [
@@ -15,7 +15,7 @@
 [http.routers.api]
 	rule = "Host(`monitor-kusama-node.polkaview.network`)"
 	entrypoints = ["websecure"]
-	middlewares = ["simpleAuth"]
+	middlewares = ["simpleAuth", "node-whitelist"]
 	service = "api@internal"
 	[http.routers.api.tls]
 		certResolver = "lets-encrypt"
