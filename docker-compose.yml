@@ -34,7 +34,7 @@ services:
                         - /home/ubuntu/polkavolume:/polkadot
                 command: [
                         "--ws-external",
-                        "--rpc-cors=all",
+                        "--rpc-cors", "all",
                         "--pruning", "archive",
                 ]
                 networks:
