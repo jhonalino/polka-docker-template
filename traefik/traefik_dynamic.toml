@@ -2,7 +2,7 @@
 	[http.middlewares.node-whitelist.ipWhiteList]
 		#only allow my local pc and polkaview frontend to connect
 		#blacklist everything else
-		sourceRange = ["75.82.190.61", "67.205.143.91"] 
+		sourceRange = ["75.82.190.61", "45.79.175.203"] 
 
 [http.middlewares.simpleAuth.basicAuth]
 	users = [

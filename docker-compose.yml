@@ -22,14 +22,14 @@ services:
                         - web
         polkadot:
                 container_name: polkadot
-                image: parity/polkadot
+                image: parity/polkadot:latest
                 labels:
                         - traefik.enable=true
                         - traefik.http.routers.polkadot.rule=Host(`polkadot-node.polkaview.network`)
                         - traefik.http.routers.polkadot.tls=true
                         - traefik.http.routers.polkadot.tls.certresolver=lets-encrypt
                         - traefik.http.services.polkadot.loadbalancer.server.port=9944
-                        - traefik.http.routers.polkadot.middlewares=node-whitelist@file
+                          #- traefik.http.routers.polkadot.middlewares=node-whitelist@file
                 volumes:
                         - /home/ubuntu/polkavolume:/polkadot
                 command: [
