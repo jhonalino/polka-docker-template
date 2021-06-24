@@ -1,0 +1,3 @@
+[submodule "substrate-archive"]
+	path = substrate-archive
+	url = git@github.com:paritytech/substrate-archive.git
